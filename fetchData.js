@@ -6,7 +6,10 @@
       credits: false,
 
       xAxis: {
-        allowDecimals: false
+        allowDecimals: false,
+        title: {
+          text: 'Tempo'
+        }
       },
 
       yAxis: [{
