@@ -101,7 +101,7 @@
 
         var temperaturas = [], umidades = [];
 
-        for (i = 1 ; i < size ; ++i)
+        for (i = 1 ; i < size - 1; ++i)
         {
           var splitLine = newData[i].split(/,/);
           
@@ -132,7 +132,7 @@
 
         var temperaturas = [], umidades = [];
 
-        for (i = 1 ; i < size ; ++i)
+        for (i = 1 ; i < size - 1; ++i)
         {
           var splitLine = newData[i].split(/,/);
           
