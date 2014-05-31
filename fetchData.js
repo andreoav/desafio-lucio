@@ -4,22 +4,28 @@
 
     var chartOptions = {
       credits: false,
-
+      rangeSelector: {
+        enabled: false
+      },
       xAxis: {
         allowDecimals: false,
+        type: 'datetime',
         title: {
           text: 'Tempo'
+        },
+        labels: {
+          formatter: function() {
+            return this.value;
+          }
         }
       },
-
       yAxis: [{
         labels: {
           format: '{value} ºC'
         },
         title: {
           text: 'Temperatura'
-        },
-        opposite: true
+        }
       }, {
         labels: {
           formatter: function() {
@@ -30,15 +36,15 @@
           text: 'Umidade'
         }
       }],
-      series: [{
-        name: 'Temperatura',
-        type: 'line',
-        yAxis: 0
-      }, {
-        name: 'Umidade',
-        type: 'line',
-        yAxis: 1
-      }],
+      navigator: {
+        xAxis: {
+          labels: {
+            formatter: function() {
+              return this.value;
+            }
+          }
+        }
+      },
       tooltip: {
         shared: true,
         formatter: function() {
@@ -51,44 +57,53 @@
           return s;
         }
       },
-      legend: {
-        layout: 'vertical',
-        align: 'left',
-        x: 120,
-        verticalAlign: 'top',
-        y: 80,
-        floating: true,
-        backgroundColor: (Highcharts.theme && Highcharts.theme.legendBackgroundColor) || '#FFFFFF'
+      plotOptions: {
+        line: {
+          marker: {
+            enabled: false
+          }
+        }
       }
 
     };
 
-    // Dentro
-    var c1Options = {
+    window.chart1 = new Highcharts.StockChart($.extend(chartOptions, {
       title: {
-        text: 'Sala'
+        text: 'Gráfico da Sala'
       },
-
       chart: {
-        renderTo: 'chart1',
-        zoomType: 'xy'
-      }
-    };
-
-    var chart1 = new Highcharts.Chart($.extend(chartOptions, c1Options));
-
-    // fora
-    var c2Options = {
+        renderTo: 'grafico-sala',
+        zoomType: 'x'
+      },
+      series: [{
+        name: 'Temperatura',
+        type: 'line',
+        yAxis: 0
+      }, {
+        name: 'Umidade',
+        type: 'line',
+        yAxis: 1
+      }]
+    }));
+    
+    window.chart2 = new Highcharts.StockChart($.extend(chartOptions, {
       title: {
-        text: 'Fora'
+        text: 'Gráfico de Fora'
       },
-
       chart: {
-        renderTo: 'chart2',
-        zoomType: 'xy'
-      }
-    };
-    var chart2 = new Highcharts.Chart($.extend(chartOptions, c2Options));
+        renderTo: 'grafico-fora',
+        zoomType: 'x'
+      },
+      series: [{
+        name: 'Temperatura',
+        type: 'line',
+        yAxis: 0
+      }, {
+        name: 'Umidade',
+        type: 'line',
+        yAxis: 1
+      }]
+    }));
 
     var atualizaDados = function() {
 
